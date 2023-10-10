@@ -1,3 +1,5 @@
+import { isToday, toDate } from "date-fns";
+import Task from "./Task";
 import Todo from "./Todo";
 
 const LocalStorage = () => {
@@ -14,7 +16,6 @@ const LocalStorage = () => {
 
     return todo;
   };
-  getTodo();
 
   const addProject = (newProject) => {
     const todo = getTodo();
@@ -72,6 +73,52 @@ const LocalStorage = () => {
     save(todo);
   };
 
+  const getFormattedDate = (dueDate) => {
+    // console.log(dueDate);
+    const day = dueDate.split("-")[2];
+    const month = dueDate.split("-")[1];
+    const year = dueDate.split("-")[0];
+    return `${month}/ ${day}/ ${year}`;
+  };
+
+  const updateTodayProject = () => {
+    const todo = getTodo();
+
+    const exists = (taskName) => {
+      return todo.projects[1].tasks.some((task) => task.name === taskName);
+    };
+
+    const getTodayTask = () => {
+      let todayTasks = [];
+      todo.projects.forEach((project) => {
+        project.tasks.filter((task) => {
+          const taskDate = new Date(getFormattedDate(task.dueDate));
+          if (isToday(toDate(taskDate)) && !exists(task.name)) {
+            todayTasks.push(task);
+          }
+        });
+      });
+      return todayTasks;
+    };
+
+    todo.projects.forEach((project) => {
+      if (project.name === "Today Tasks" || project.name === "Upcoming Tasks")
+        return;
+
+      todo.projects[1].tasks = [];
+
+      const todayTasks = getTodayTask();
+      console.log(todayTasks);
+      todayTasks.forEach((task) => {
+        todo.projects[1].tasks.push(
+          Task(task.name, task.description, task.dueDate, task.priority)
+        );
+      });
+    });
+    console.log(todo.projects[1].tasks);
+    save(todo);
+  };
+
   return {
     save,
     getTodo,
@@ -80,6 +127,7 @@ const LocalStorage = () => {
     deleteProject,
     addTask,
     deleteTask,
+    updateTodayProject,
   };
 };
 
