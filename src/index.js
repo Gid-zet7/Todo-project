@@ -1,3 +1,3 @@
-import LocalStorage from "./modules/LocalStorage";
+import domManip from "./modules/domManip";
 
-LocalStorage();
+domManip().loadHome();
