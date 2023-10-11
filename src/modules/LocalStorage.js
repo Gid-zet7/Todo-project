@@ -58,7 +58,7 @@ const LocalStorage = () => {
     console.log(projectIndex);
 
     const taskToDelete = todo.projects[projectIndex].tasks.find(
-      (task) => task.name === taskName
+      (task) => task.name.split(" ").join("") === taskName
     );
 
     console.log(taskToDelete);

@@ -36,6 +36,7 @@ const domManip = () => {
         }
       });
     initAddProjectBtn();
+    initProjPopupBtns();
   }
 
   function addProject() {
@@ -161,6 +162,18 @@ const domManip = () => {
     const create = document.getElementById("create");
 
     create.addEventListener("click", addProject);
+  }
+
+  function initProjPopupBtns() {
+    const projPopupBtn = document.getElementById("create__project");
+    const cancelBtn = document.getElementById("close");
+    const addPopup = document.querySelector(".project-modal ");
+    projPopupBtn.addEventListener("click", () => {
+      addPopup.classList.add("active");
+    });
+    cancelBtn.addEventListener("click", () => {
+      addPopup.classList.remove("active");
+    });
   }
 
   function initTaskAddBtn() {
