@@ -5,6 +5,7 @@ import Task from "./Task";
 const domManip = () => {
   function loadHome() {
     loadProjects();
+    initDefaultBtns();
     loadProjectContent("Inbox");
   }
   function createProjectUI(projectName) {
@@ -107,6 +108,7 @@ const domManip = () => {
     );
     if (projectName !== "Today Tasks" && projectName !== "Upcoming Tasks") {
       initTaskAddBtn();
+      initTaskModalBtn();
     }
   }
 
@@ -165,6 +167,45 @@ const domManip = () => {
     const submit = document.getElementById("submit");
 
     submit.addEventListener("click", addTask);
+  }
+
+  function initDefaultBtns() {
+    const inbox = document.getElementById("all-tasks");
+    const todayTasks = document.getElementById("today-tasks");
+    const weekTasks = document.getElementById("week-tasks");
+
+    inbox.addEventListener("click", handleProjectButton);
+    todayTasks.addEventListener("click", updateTodayProject);
+    todayTasks.addEventListener("click", handleProjectButton);
+    weekTasks.addEventListener("click", handleProjectButton);
+  }
+
+  function handleProjectButton(e) {
+    const name = e.target.textContent;
+    loadProjectContent(name);
+  }
+
+  function updateTodayProject() {
+    LocalStorage().updateTodayProject();
+  }
+
+  function initTaskModalBtn() {
+    const taskPopupBtn = document.getElementById("button-add-task");
+    const taskModal = document.querySelector(".task-modal");
+    const overlay = document.getElementById("overlay");
+
+    const openModal = () => {
+      taskModal.classList.add("open");
+      overlay.classList.add("active");
+    };
+
+    const closeModal = () => {
+      taskModal.classList.remove("open");
+      overlay.classList.remove("active");
+    };
+
+    taskPopupBtn.onclick = openModal;
+    overlay.onclick = closeModal;
   }
 
   return { loadHome };
