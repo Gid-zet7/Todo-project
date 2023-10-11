@@ -20,6 +20,7 @@ const domManip = () => {
       </div>
     </div>
     `;
+    initProjectDeleteBtn();
   }
 
   //   Loads projects from the localStorage and creates the project UI with the data retrieved
@@ -173,6 +174,23 @@ const domManip = () => {
     cancelBtn.addEventListener("click", () => {
       addPopup.classList.remove("active");
     });
+  }
+
+  function initProjectDeleteBtn() {
+    const delProject = document.querySelectorAll(".delete_project");
+    delProject.forEach((button) =>
+      button.addEventListener("click", (e) => {
+        const projectName = e.target.id;
+        LocalStorage().deleteProject(projectName);
+        clearProjectContent();
+        loadProjects();
+      })
+    );
+  }
+
+  function clearProjectContent() {
+    const container = document.querySelector(".project-list");
+    container.textContent = "";
   }
 
   function initTaskAddBtn() {
