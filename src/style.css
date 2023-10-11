@@ -124,6 +124,10 @@ input:focus:invalid {
     box-sizing: border-box;
 }
 
+.error.active {
+    padding: 0.1rem;
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -271,4 +275,78 @@ input:focus:invalid {
 
 .side-proj h4 {
     flex: 2;
+}
+
+.side-proj:hover .delete_project {
+    display: block;
+    height: 75%;
+    border-radius: .5rem 0rem .5rem;
+    background: var(--bg-light);
+}
+
+.delete_project {
+    display: none;
+}
+
+.delete_project:hover {
+    fill: rgb(253, 77, 77)
+}
+
+.side-proj > h4 {
+    padding: .8rem;
+    /* margin-top: 1rem; */
+    cursor: pointer;
+    user-select: none;
+}
+
+.side-proj > h4:hover {
+    background-color: var(--bg-light);
+    border-radius: .5rem 0rem .5rem;
+}
+
+.project-modal {
+    display: none;
+}
+
+.project-modal.active {
+    display: block;
+}
+
+.project-modal > input {
+    margin-top: 1rem;
+    height: 2rem;
+    /* border: none; */
+    outline: none;
+    font-size: 1.2rem;
+    border-radius: .3rem 0rem .3rem;
+}
+
+.project-modal > div {
+    margin-top: 1rem;
+}
+
+.project-modal > div > button {
+    justify-content: space-between;
+    padding: .5rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: .3rem 0rem .3rem;
+}
+
+#create {
+    background-color: #1ae094;
+}
+
+#create:hover {
+    background-color: #23c587;
+}
+
+#close {
+    background-color: #fa7d7d;
+}
+
+#close:hover {
+    background-color: #f16b6b;
 }
