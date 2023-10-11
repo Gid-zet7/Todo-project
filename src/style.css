@@ -3,7 +3,7 @@
     --bg-color: #8054FF;
     --btn-color: #6e41f3;
     --bg-light: #f4f4f4;
-    --font-size: calc(.5em + .7vw);
+    --font-size: calc(.5em + .5vw);
 
 }
 
@@ -217,4 +217,58 @@ input:focus:invalid {
     padding: .8rem;
     user-select: none;
     cursor: pointer;
+}
+
+#all-tasks {
+    background-color: var(--bg-light);
+    border-radius: .5rem 0rem .5rem;
+}
+
+
+#today-tasks:hover {
+    background-color: var(--bg-light);
+    border-radius: .5rem 0rem .5rem;
+}
+
+#week-tasks:hover {
+    background-color: var(--bg-light);
+    border-radius: .5rem 0rem .5rem;
+}
+
+.projects > div {
+    cursor: pointer;
+    user-select: none;
+}
+
+#create__project {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    /* padding: .5rem; */
+    border-radius: 1rem 0rem 1rem;
+    background-color: var(--bg-light);
+    width: 80%;
+    margin-bottom: 3rem;
+    font-size: var(--font-size);
+    transition: background-color .3s ease-in-out;
+}
+
+#create__project:hover {
+    background-color: #1ae094;
+    color: #fff;
+}
+
+#create__project h3 {
+    margin-right: .7rem;
+}
+
+.side-proj {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    /* padding: .5rem; */
+}
+
+.side-proj h4 {
+    flex: 2;
 }
