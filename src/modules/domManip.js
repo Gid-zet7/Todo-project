@@ -86,7 +86,6 @@ const domManip = () => {
 
   function createTaskUI(title, description, dueDate, priority) {
     const taskList = document.querySelector(".tasks-list");
-    // const text = title
     const formatTitle = title.split(" ").join("");
     taskList.innerHTML += `
     <div class="task-ui" id=${formatTitle}>
