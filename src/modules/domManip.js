@@ -146,7 +146,7 @@ const domManip = () => {
 
     if (exists(taskTitle)) {
       alert("Task already exists");
-      // Create a function to clear all input fields
+      clearInputField();
       return;
     }
 
@@ -157,7 +157,7 @@ const domManip = () => {
 
     createTaskUI(taskTitle, description, dueDate, priority);
 
-    // Create a function to clear all input fields
+    clearInputField();
   }
 
   function initAddProjectBtn() {
@@ -203,8 +203,14 @@ const domManip = () => {
 
   function initTaskAddBtn() {
     const submit = document.getElementById("submit");
+    const taskModal = document.querySelector(".task-modal");
+    const overlay = document.getElementById("overlay");
 
     submit.addEventListener("click", addTask);
+    submit.addEventListener("click", () => {
+      taskModal.classList.remove("open");
+      overlay.classList.remove("active");
+    });
   }
 
   function clearTasks() {
@@ -274,6 +280,18 @@ const domManip = () => {
 
     taskPopupBtn.onclick = openModal;
     overlay.onclick = closeModal;
+  }
+
+  function clearInputField() {
+    let titleInput = document.getElementById("title");
+    let descriptionInput = document.getElementById("description");
+    let dueDateInput = document.getElementById("dueDate");
+    let priorityInput = document.getElementById("priority");
+
+    titleInput.value = "";
+    descriptionInput.value = "";
+    dueDateInput.value = "";
+    priorityInput.value = "";
   }
 
   return { loadHome };
