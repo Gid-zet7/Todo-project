@@ -96,6 +96,7 @@ const domManip = () => {
       <p>${priority}</p>
     </div>
     `;
+    initDeleteTask();
   }
 
   function loadTasks(projectName) {
@@ -193,10 +194,39 @@ const domManip = () => {
     container.textContent = "";
   }
 
+  // Clears the projects tasks on the UI
+  function clearProjectPreview() {
+    const container = document.querySelector(".project__content");
+    container.innerHTML = "";
+  }
+
   function initTaskAddBtn() {
     const submit = document.getElementById("submit");
 
     submit.addEventListener("click", addTask);
+  }
+
+  function clearTasks() {
+    const container = document.querySelector(".task-list");
+    container.innerHTML = "";
+  }
+
+  function initDeleteTask() {
+    const projectName = document.getElementById("project-name").textContent;
+    const taskUI = document.querySelectorAll(".task-ui");
+    taskUI.forEach(
+      (task) =>
+        task.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const taskName = this.getAttribute("id");
+          LocalStorage().deleteTask(projectName, taskName, title);
+          clearProjectPreview();
+          loadProjectContent(projectName);
+        }),
+      {
+        capture: true,
+      }
+    );
   }
 
   function initDefaultBtns() {
