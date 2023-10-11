@@ -21,6 +21,7 @@ const domManip = () => {
     </div>
     `;
     initProjectDeleteBtn();
+    initProjectPreviewBtns();
   }
 
   //   Loads projects from the localStorage and creates the project UI with the data retrieved
@@ -238,6 +239,13 @@ const domManip = () => {
     todayTasks.addEventListener("click", updateTodayProject);
     todayTasks.addEventListener("click", handleProjectButton);
     weekTasks.addEventListener("click", handleProjectButton);
+  }
+
+  function initProjectPreviewBtns() {
+    const projBtn = document.querySelectorAll(".side-proj h4");
+    projBtn.forEach((button) =>
+      button.addEventListener("click", handleProjectButton)
+    );
   }
 
   function handleProjectButton(e) {
