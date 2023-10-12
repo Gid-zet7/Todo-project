@@ -12,7 +12,7 @@ const domManip = () => {
     const projectContainer = document.querySelector(".project-list");
     projectContainer.innerHTML += `
     <div class="side-proj">
-      <h4>${projectName}</h4>
+      <h4 id="${projectName}"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" ><path d="M280-600v-80h560v80H280Zm0 160v-80h560v80H280Zm0 160v-80h560v80H280ZM160-600q-17 0-28.5-11.5T120-640q0-17 11.5-28.5T160-680q17 0 28.5 11.5T200-640q0 17-11.5 28.5T160-600Zm0 160q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520q17 0 28.5 11.5T200-480q0 17-11.5 28.5T160-440Zm0 160q-17 0-28.5-11.5T120-320q0-17 11.5-28.5T160-360q17 0 28.5 11.5T200-320q0 17-11.5 28.5T160-280Z"/></svg>${projectName}</h4>
         <svg xmlns="http://www.w3.org/2000/svg" class="delete_project" id="${projectName}"
         height="15" viewBox="0 96 960 960" width="20" fill="#8054FF">
         <path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/>
@@ -91,7 +91,7 @@ const domManip = () => {
     const formatTitle = title.split(" ").join("");
     taskList.innerHTML += `
     <div class="task-ui" id=${formatTitle}>
-      <p><input type="radio" name="radio"></input>${title}</p>
+      <p>${title}</p>
       <p>${description}</p>
       <p>${dueDate}</p>
       <p>${priority}</p>
@@ -250,13 +250,23 @@ const domManip = () => {
   function initProjectPreviewBtns() {
     const projBtn = document.querySelectorAll(".side-proj h4");
     projBtn.forEach((button) =>
-      button.addEventListener("click", handleProjectButton)
+      button.addEventListener("click", handleUnknownProjectBtns, {
+        capture: true,
+      })
     );
   }
 
   function handleProjectButton(e) {
-    const name = e.target.textContent;
-    loadProjectContent(name);
+    // console.log(e);
+    e.stopPropagation();
+    const projectName = this.getAttribute("class");
+    loadProjectContent(projectName);
+  }
+
+  function handleUnknownProjectBtns(e) {
+    e.stopPropagation();
+    const projectName = this.getAttribute("id");
+    loadProjectContent(projectName);
   }
 
   function updateTodayProject() {
