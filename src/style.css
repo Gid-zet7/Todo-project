@@ -370,7 +370,7 @@ input:focus:invalid {
 }
 
 @media screen and (max-width: 680px) {
-    .container {
+    /* .container {
         display: flex;
         
     }
@@ -381,7 +381,6 @@ input:focus:invalid {
 
     .content {
         padding: 0;
-       /* width: 76px;  */
     }
 
     .content .inactive {
@@ -389,7 +388,6 @@ input:focus:invalid {
     }
 
     .project__content {
-        /* display: none; */
         flex: 1;
     }
 
@@ -416,11 +414,9 @@ input:focus:invalid {
     #Inbox {
         fill: #1ae094;
         width: 100%;
-        /* height: 30px; */
     }
 
     .today {
-        /* fill: #1ae094; */
         width: 100%;
     }
 
@@ -469,5 +465,101 @@ input:focus:invalid {
 
     .tasks-list > div {
         align-items: center;
+    } */
+
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .text-header {
+        padding: 1rem;
+        background-color: #EAF1F1;
+    }
+
+    .content {
+        position: relative;
+        text-align: center;
+        position: fixed;
+        z-index: 999;
+        padding: 0;
+        width: 100%;
+        min-height: 10vh;
+        background-color: transparent;
+        color: #333;
+        font-size: calc(.3em + .7vw);
+        line-height: calc(2em + 2vw);
+
+    }
+
+    .side-panel {
+        /* position: absolute; */
+        text-align: left;
+        top: 100%;
+        left: 0;
+        padding: 2rem;
+        background-color: #EAF1F1;
+        width: 100%;
+        height: 100vh;
+        /* display: none; */
+        /* transform: scale(1, 0); */
+        transform-origin: top;
+        transition: transform 400ms ease-in-out;
+    }
+
+    .nav-toggle {
+        /* display: none; */
+    }
+
+    .nav-toggle-label {
+        position: absolute;
+        top: 2rem;
+        left: 0;
+        margin-left: 1em;
+        /* height: 100%; */
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-toggle-label span,
+    .nav-toggle-label span::before,
+    .nav-toggle-label span::after {
+        display: block;
+        background: #333;
+        height: 2px;
+        width: 2em;
+        border-radius: 2px;
+        position: relative;
+    }
+
+    .nav-toggle-label span::before,
+    .nav-toggle-label span::after {
+        content: '';
+        position: absolute;
+
+    }
+
+    .nav-toggle-label span::before,
+    .nav-toggle-label span::after {
+        content: '';
+        position: absolute;
+
+    }
+
+    .nav-toggle-label span::before {
+        bottom: 7px;
+    }
+
+    .nav-toggle-label span::after {
+        top: 7px;
+    }
+
+    .side-panel.active {
+        display: none;
+        /* transform: scale(1, 1); */
+    }
+
+    .project__content {
+        margin-top: 5rem;
     }
 }

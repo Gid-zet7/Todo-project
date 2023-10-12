@@ -7,7 +7,20 @@ const domManip = () => {
     loadProjects();
     initDefaultBtns();
     loadProjectContent("Inbox");
+    navToggle();
   }
+
+  function navToggle() {
+    const navToggle = document.querySelector(".nav-toggle-label");
+
+    navToggle.addEventListener("click", toggleNav);
+  }
+
+  function toggleNav() {
+    const sidePanel = document.querySelector(".side-panel");
+    sidePanel.classList.toggle("active");
+  }
+
   function createProjectUI(projectName) {
     const projectContainer = document.querySelector(".project-list");
     projectContainer.innerHTML += `
@@ -242,9 +255,12 @@ const domManip = () => {
     const weekTasks = document.getElementById("week-tasks");
 
     inbox.addEventListener("click", handleProjectButton);
+    inbox.addEventListener("click", toggleNav);
     todayTasks.addEventListener("click", updateTodayProject);
     todayTasks.addEventListener("click", handleProjectButton);
+    todayTasks.addEventListener("click", toggleNav);
     weekTasks.addEventListener("click", handleProjectButton);
+    weekTasks.addEventListener("click", toggleNav);
   }
 
   function initProjectPreviewBtns() {
@@ -267,6 +283,7 @@ const domManip = () => {
     e.stopPropagation();
     const projectName = this.getAttribute("id");
     loadProjectContent(projectName);
+    toggleNav();
   }
 
   function updateTodayProject() {
